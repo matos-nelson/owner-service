@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
+import org.rent.circle.owner.api.dto.OwnerDto;
 import org.rent.circle.owner.api.dto.OwnerInfoDto;
 import org.rent.circle.owner.api.enums.Suffix;
 import org.rent.circle.owner.api.persistence.model.Owner;
@@ -51,5 +52,40 @@ public class OwnerMapperTest {
         assertEquals(ownerInfo.getSuffix().name(), result.getSuffix());
         assertEquals(ownerInfo.getEmail(), result.getEmail());
         assertEquals(ownerInfo.getPhone(), result.getPhone());
+    }
+
+    @Test
+    public void toDto_WhenGivenNull_ShouldReturnNull() {
+        // Arrange
+
+        // Act
+        OwnerDto result = ownerMapper.toDto(null);
+
+        // Assert
+        assertNull(result);
+    }
+
+    @Test
+    public void toDto_WhenGivenAnOwner_ShouldMap() {
+        // Arrange
+        Owner owner = new Owner();
+        owner.setFirstName("First");
+        owner.setLastName("Last");
+        owner.setMiddleName("Middle");
+        owner.setSuffix(Suffix.SR.name());
+        owner.setEmail("myemail@email.com");
+        owner.setPhone("1234567890");
+
+        // Act
+        OwnerDto result = ownerMapper.toDto(owner);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(owner.getFirstName(), result.getFirstName());
+        assertEquals(owner.getLastName(), result.getLastName());
+        assertEquals(owner.getMiddleName(), result.getMiddleName());
+        assertEquals(owner.getSuffix(), result.getSuffix().name());
+        assertEquals(owner.getEmail(), result.getEmail());
+        assertEquals(owner.getPhone(), result.getPhone());
     }
 }
