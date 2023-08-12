@@ -47,6 +47,10 @@
       <artifactId>quarkus-jdbc-mysql</artifactId>
     </dependency>
     <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-hibernate-validator</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
@@ -55,11 +59,6 @@
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct</artifactId>
       <version>${mapstruct.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.rent.circle</groupId>
-      <artifactId>address-dto</artifactId>
-      <version>1.0.4</version>
     </dependency>
     <dependency>
       <groupId>org.mapstruct</groupId>
