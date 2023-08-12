@@ -1,0 +1,30 @@
+version: '3.8'
+
+name: maintenance-container
+services:
+  app:
+    image: 'quarkus/maintenance-service'
+    container_name: "owner-app"
+    ports:
+      - '8080:8080'
+    links:
+      - "mysql-db"
+    environment:
+      - DB_USER=root
+      - DB_PWD=root
+      - DB_URL=jdbc:mysql://mysql-db/owner
+
+  mysql-db:
+    image: mysql:8.0
+    container_name: "mysql-db"
+    environment:
+      - MYSQL_DATABASE=owner
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - '3306:3306'
+    volumes:
+      - owner:/var/lib/mysql
+      - ./../../../db/sql/create_owner_schemas.sql:/docker-entrypoint-initdb.d/create_owner_schemas.sql
+volumes:
+  owner:
+    driver: local
