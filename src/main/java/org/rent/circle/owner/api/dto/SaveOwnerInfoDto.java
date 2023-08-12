@@ -14,7 +14,7 @@ import org.rent.circle.owner.api.enums.Suffix;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OwnerInfoDto {
+public class SaveOwnerInfoDto {
 
     @NotNull
     @NotBlank

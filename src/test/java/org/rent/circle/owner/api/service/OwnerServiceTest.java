@@ -12,7 +12,7 @@ import io.quarkus.test.junit.mockito.InjectMock;
 import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
 import org.rent.circle.owner.api.dto.OwnerDto;
-import org.rent.circle.owner.api.dto.OwnerInfoDto;
+import org.rent.circle.owner.api.dto.SaveOwnerInfoDto;
 import org.rent.circle.owner.api.enums.Suffix;
 import org.rent.circle.owner.api.persistence.model.Owner;
 import org.rent.circle.owner.api.persistence.repository.OwnerRepository;
@@ -33,7 +33,7 @@ public class OwnerServiceTest {
     @Test
     public void saveInfo_WhenCalled_ShouldReturnSavedOwnerId() {
         // Arrange
-        OwnerInfoDto ownerInfo = OwnerInfoDto.builder()
+        SaveOwnerInfoDto ownerInfo = SaveOwnerInfoDto.builder()
             .firstName("First")
             .lastName("Last")
             .middleName("Middle")

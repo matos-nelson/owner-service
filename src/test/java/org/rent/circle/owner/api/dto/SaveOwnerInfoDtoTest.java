@@ -5,7 +5,7 @@ import org.force66.beantester.BeanTester;
 import org.junit.jupiter.api.Test;
 
 @QuarkusTest
-public class OwnerInfoDtoTest {
+public class SaveOwnerInfoDtoTest {
 
     @Test
     public void OwnerInfoDto_SettersAndGetters_ShouldWork() {
@@ -13,7 +13,7 @@ public class OwnerInfoDtoTest {
         BeanTester beanTester = new BeanTester();
 
         // Act
-        beanTester.testBean(OwnerInfoDto.class);
+        beanTester.testBean(SaveOwnerInfoDto.class);
 
         // Assert
     }

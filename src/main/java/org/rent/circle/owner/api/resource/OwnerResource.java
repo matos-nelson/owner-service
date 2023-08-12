@@ -8,7 +8,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.rent.circle.owner.api.dto.OwnerInfoDto;
+import org.rent.circle.owner.api.dto.SaveOwnerInfoDto;
 import org.rent.circle.owner.api.service.OwnerService;
 
 @AllArgsConstructor
@@ -21,7 +21,7 @@ public class OwnerResource {
     private final OwnerService ownerService;
 
     @POST
-    public Long saveOwnerInfo(@Valid OwnerInfoDto ownerInfo) {
+    public Long saveOwnerInfo(@Valid SaveOwnerInfoDto ownerInfo) {
         return ownerService.saveInfo(ownerInfo);
     }
 }
