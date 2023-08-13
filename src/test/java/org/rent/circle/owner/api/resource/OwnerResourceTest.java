@@ -2,6 +2,7 @@ package org.rent.circle.owner.api.resource;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.common.http.TestHTTPEndpoint;
@@ -62,5 +63,39 @@ public class OwnerResourceTest {
             .post()
             .then()
             .statusCode(HttpStatus.SC_BAD_REQUEST);
+    }
+
+    @Test
+    public void GET_WhenAnOwnerCantBeFound_ShouldReturnNoContent() {
+        // Arrange
+
+        // Act
+        // Assert
+        given()
+            .when()
+            .get("/1")
+            .then()
+            .statusCode(HttpStatus.SC_NO_CONTENT);
+    }
+
+    @Test
+    public void GET_WhenOwnerIsFound_ShouldReturnOwner() {
+        // Arrange
+
+        // Act
+        // Assert
+        given()
+            .when()
+            .get("/100")
+            .then()
+            .statusCode(HttpStatus.SC_OK)
+            .body("addressId", is(200),
+                "firstName", is("First"),
+                "lastName", is("Last"),
+                "middleName", is(nullValue()),
+                "suffix", is(nullValue()),
+                "email", is("first.last@email.com"),
+                "phone", is("1234567890")
+            );
     }
 }
