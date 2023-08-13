@@ -1,7 +1,5 @@
 package org.rent.circle.owner.api.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,25 +12,13 @@ import org.rent.circle.owner.api.enums.Suffix;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OwnerInfoDto {
+public class OwnerDto {
 
-    @NotNull
-    @NotBlank
+    private Long addressId;
     private String firstName;
-
-    @NotNull
-    @NotBlank
     private String lastName;
-
     private String middleName;
-
     private Suffix suffix;
-
-    @NotNull
-    @NotBlank
     private String email;
-
-    @NotNull
-    @NotBlank
     private String phone;
 }

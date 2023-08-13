@@ -1,0 +1,1 @@
+INSERT INTO owner(id, address_id, first_name, last_name, email, phone) values (100, 200, 'First', 'Last', 'first.last@email.com', '1234567890');

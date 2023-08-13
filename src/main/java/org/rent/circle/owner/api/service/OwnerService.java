@@ -4,7 +4,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.rent.circle.owner.api.dto.OwnerInfoDto;
+import org.rent.circle.owner.api.dto.OwnerDto;
+import org.rent.circle.owner.api.dto.SaveOwnerInfoDto;
 import org.rent.circle.owner.api.persistence.model.Owner;
 import org.rent.circle.owner.api.persistence.repository.OwnerRepository;
 import org.rent.circle.owner.api.service.mapper.OwnerMapper;
@@ -18,9 +19,14 @@ public class OwnerService {
     private final OwnerRepository ownerRepository;
 
     @Transactional
-    public Long saveInfo(OwnerInfoDto ownerInfo) {
+    public Long saveInfo(SaveOwnerInfoDto ownerInfo) {
         Owner owner = ownerMapper.toModel(ownerInfo);
         ownerRepository.persist(owner);
         return owner.getId();
+    }
+
+    public OwnerDto getOwnerInfo(Long ownerId) {
+        Owner owner = ownerRepository.findById(ownerId);
+        return ownerMapper.toDto(owner);
     }
 }
