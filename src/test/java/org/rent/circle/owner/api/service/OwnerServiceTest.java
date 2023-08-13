@@ -34,6 +34,7 @@ public class OwnerServiceTest {
     public void saveInfo_WhenCalled_ShouldReturnSavedOwnerId() {
         // Arrange
         SaveOwnerInfoDto ownerInfo = SaveOwnerInfoDto.builder()
+            .addressId(1L)
             .firstName("First")
             .lastName("Last")
             .middleName("Middle")

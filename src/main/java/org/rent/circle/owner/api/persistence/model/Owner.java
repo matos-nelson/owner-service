@@ -20,6 +20,9 @@ public class Owner extends BaseModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "address_id")
+    private Long addressId;
+
     @Column(name = "first_name")
     private String firstName;
 

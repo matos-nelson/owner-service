@@ -17,6 +17,9 @@ import org.rent.circle.owner.api.enums.Suffix;
 public class SaveOwnerInfoDto {
 
     @NotNull
+    private Long addressId;
+
+    @NotNull
     @NotBlank
     private String firstName;
 

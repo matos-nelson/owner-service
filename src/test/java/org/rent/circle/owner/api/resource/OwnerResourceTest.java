@@ -21,6 +21,7 @@ public class OwnerResourceTest {
     public void Post_WhenGivenAValidRequestToSave_ShouldReturnSavedOwnerId() {
         // Arrange
         SaveOwnerInfoDto ownerInfo = SaveOwnerInfoDto.builder()
+            .addressId(1L)
             .firstName("First")
             .lastName("Last")
             .middleName("Middle")
@@ -45,6 +46,7 @@ public class OwnerResourceTest {
     public void Post_WhenGivenAnInValidRequestToSave_ShouldReturnBadRequest() {
         // Arrange
         SaveOwnerInfoDto ownerInfo = SaveOwnerInfoDto.builder()
+            .addressId(1L)
             .firstName("First")
             .lastName("Last")
             .middleName("Middle")

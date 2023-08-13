@@ -33,6 +33,7 @@ public class OwnerMapperTest {
     public void toModel_WhenGivenAValidDto_ShouldMap() {
         // Arrange
         SaveOwnerInfoDto ownerInfo = SaveOwnerInfoDto.builder()
+            .addressId(1L)
             .firstName("First")
             .lastName("Last")
             .middleName("Middle")
@@ -46,6 +47,7 @@ public class OwnerMapperTest {
 
         // Assert
         assertNotNull(result);
+        assertEquals(ownerInfo.getAddressId(), result.getAddressId());
         assertEquals(ownerInfo.getFirstName(), result.getFirstName());
         assertEquals(ownerInfo.getLastName(), result.getLastName());
         assertEquals(ownerInfo.getMiddleName(), result.getMiddleName());
@@ -69,6 +71,7 @@ public class OwnerMapperTest {
     public void toDto_WhenGivenAnOwner_ShouldMap() {
         // Arrange
         Owner owner = new Owner();
+        owner.setAddressId(1L);
         owner.setFirstName("First");
         owner.setLastName("Last");
         owner.setMiddleName("Middle");
@@ -81,6 +84,7 @@ public class OwnerMapperTest {
 
         // Assert
         assertNotNull(result);
+        assertEquals(owner.getAddressId(), result.getAddressId());
         assertEquals(owner.getFirstName(), result.getFirstName());
         assertEquals(owner.getLastName(), result.getLastName());
         assertEquals(owner.getMiddleName(), result.getMiddleName());

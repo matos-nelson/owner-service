@@ -14,6 +14,7 @@ import org.rent.circle.owner.api.enums.Suffix;
 @NoArgsConstructor
 public class OwnerDto {
 
+    private Long addressId;
     private String firstName;
     private String lastName;
     private String middleName;
