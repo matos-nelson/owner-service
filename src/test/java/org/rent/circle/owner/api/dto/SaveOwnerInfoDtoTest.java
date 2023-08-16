@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class SaveOwnerInfoDtoTest {
 
     @Test
-    public void OwnerInfoDto_SettersAndGetters_ShouldWork() {
+    public void SaveOwnerInfoDto_SettersAndGetters_ShouldWork() {
         // Arrange
         BeanTester beanTester = new BeanTester();
 
