@@ -31,6 +31,7 @@ public class OwnerService {
         return ownerMapper.toDto(owner);
     }
 
+    @Transactional
     public void updateOwnerInfo(Long ownerId, UpdateOwnerInfoDto updateOwnerInfo) {
         Owner owner = ownerRepository.findById(ownerId);
         if (owner == null) {
@@ -38,5 +39,6 @@ public class OwnerService {
         }
 
         ownerMapper.update(updateOwnerInfo, owner);
+        ownerRepository.persist(owner);
     }
 }

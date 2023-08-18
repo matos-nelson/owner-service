@@ -11,6 +11,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 import org.rent.circle.owner.api.dto.SaveOwnerInfoDto;
+import org.rent.circle.owner.api.dto.UpdateOwnerInfoDto;
 import org.rent.circle.owner.api.enums.Suffix;
 
 @QuarkusTest
@@ -96,6 +97,89 @@ public class OwnerResourceTest {
                 "suffix", is(nullValue()),
                 "email", is("first.last@email.com"),
                 "phone", is("1234567890")
+            );
+    }
+
+    @Test
+    public void PUT_WhenGivenAnInValidRequestToUpdate_ShouldReturnBadRequest() {
+        // Arrange
+        UpdateOwnerInfoDto updateOwnerInfo = UpdateOwnerInfoDto.builder()
+            .addressId(null)
+            .firstName("UFirst")
+            .lastName("ULast")
+            .middleName(null)
+            .suffix(null)
+            .phone("1234567890")
+            .build();
+
+        // Act
+        // Assert
+        given()
+            .contentType("application/json")
+            .body(updateOwnerInfo)
+            .when()
+            .put("200")
+            .then()
+            .statusCode(HttpStatus.SC_BAD_REQUEST);
+    }
+
+    @Test
+    public void PUT_WhenAnOwnerCantBeFound_ShouldReturnNoContent() {
+        // Arrange
+        UpdateOwnerInfoDto updateOwnerInfo = UpdateOwnerInfoDto.builder()
+            .addressId(2L)
+            .firstName("UFirst")
+            .lastName("ULast")
+            .middleName(null)
+            .suffix(null)
+            .phone("1234567890")
+            .build();
+
+        // Act
+        // Assert
+        given()
+            .contentType("application/json")
+            .body(updateOwnerInfo)
+            .when()
+            .put("1")
+            .then()
+            .statusCode(HttpStatus.SC_NO_CONTENT);
+    }
+
+    @Test
+    public void PUT_WheGivenAValidUpdateRequest_ShouldReturnNoContent() {
+        // Arrange
+        UpdateOwnerInfoDto updateOwnerInfo = UpdateOwnerInfoDto.builder()
+            .addressId(2L)
+            .firstName("UFirst")
+            .lastName("ULast")
+            .middleName("UMiddle")
+            .suffix(Suffix.III)
+            .phone("1234567890")
+            .build();
+
+        // Act
+        // Assert
+        given()
+            .contentType("application/json")
+            .body(updateOwnerInfo)
+            .when()
+            .put("200")
+            .then()
+            .statusCode(HttpStatus.SC_NO_CONTENT);
+
+        given()
+            .when()
+            .get("/200")
+            .then()
+            .statusCode(HttpStatus.SC_OK)
+            .body("addressId", is(2),
+                "firstName", is(updateOwnerInfo.getFirstName()),
+                "lastName", is(updateOwnerInfo.getLastName()),
+                "middleName", is(updateOwnerInfo.getMiddleName()),
+                "suffix", is(updateOwnerInfo.getSuffix().name()),
+                "email", is("updatetest@email.com"),
+                "phone", is(updateOwnerInfo.getPhone())
             );
     }
 }

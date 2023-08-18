@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -12,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.rent.circle.owner.api.dto.OwnerDto;
 import org.rent.circle.owner.api.dto.SaveOwnerInfoDto;
+import org.rent.circle.owner.api.dto.UpdateOwnerInfoDto;
 import org.rent.circle.owner.api.service.OwnerService;
 
 @AllArgsConstructor
@@ -32,5 +34,11 @@ public class OwnerResource {
     @Path("/{id}")
     public OwnerDto getOwner(@PathParam("id") Long ownerId) {
         return ownerService.getOwnerInfo(ownerId);
+    }
+
+    @PUT
+    @Path("/{id}")
+    public void updateOwner(@PathParam("id") Long ownerId, @Valid UpdateOwnerInfoDto updateOwnerInfo) {
+        ownerService.updateOwnerInfo(ownerId, updateOwnerInfo);
     }
 }
