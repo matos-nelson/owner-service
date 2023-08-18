@@ -15,5 +15,5 @@ public interface OwnerMapper {
 
     OwnerDto toDto(Owner owner);
 
-    void update(@MappingTarget Owner owner, UpdateOwnerInfoDto updateOwnerInfo);
+    void update(UpdateOwnerInfoDto updateOwnerInfo, @MappingTarget Owner owner);
 }

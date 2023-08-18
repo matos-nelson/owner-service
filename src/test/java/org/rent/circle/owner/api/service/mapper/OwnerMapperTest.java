@@ -107,7 +107,7 @@ public class OwnerMapperTest {
         owner.setPhone("1234567890");
 
         // Act
-        ownerMapper.update(owner, null);
+        ownerMapper.update(null, owner);
 
         // Assert
         assertNotNull(owner);
@@ -143,7 +143,7 @@ public class OwnerMapperTest {
             .build();
 
         // Act
-        ownerMapper.update(owner, updateOwnerInfo);
+        ownerMapper.update(updateOwnerInfo, owner);
 
         // Assert
         assertEquals(owner.getAddressId(), updateOwnerInfo.getAddressId());
