@@ -9,6 +9,7 @@ import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
 import org.rent.circle.owner.api.dto.OwnerDto;
 import org.rent.circle.owner.api.dto.SaveOwnerInfoDto;
+import org.rent.circle.owner.api.dto.UpdateOwnerInfoDto;
 import org.rent.circle.owner.api.enums.Suffix;
 import org.rent.circle.owner.api.persistence.model.Owner;
 
@@ -91,5 +92,66 @@ public class OwnerMapperTest {
         assertEquals(owner.getSuffix(), result.getSuffix().name());
         assertEquals(owner.getEmail(), result.getEmail());
         assertEquals(owner.getPhone(), result.getPhone());
+    }
+
+    @Test
+    public void update_WhenGivenUpdatedOwnerInfoIsNull_ShouldNotUpdate() {
+        // Arrange
+        Owner owner = new Owner();
+        owner.setAddressId(1L);
+        owner.setFirstName("First");
+        owner.setLastName("Last");
+        owner.setMiddleName("Middle");
+        owner.setSuffix(Suffix.SR.name());
+        owner.setEmail("myemail@email.com");
+        owner.setPhone("1234567890");
+
+        // Act
+        ownerMapper.update(null, owner);
+
+        // Assert
+        assertNotNull(owner);
+        assertNotNull(owner.getAddressId());
+        assertNotNull(owner.getFirstName());
+        assertNotNull(owner.getLastName());
+        assertNotNull(owner.getMiddleName());
+        assertNotNull(owner.getSuffix());
+        assertNotNull(owner.getEmail());
+        assertNotNull(owner.getPhone());
+    }
+
+    @Test
+    public void update_WhenGivenUpdatedOwnerInfo_ShouldUpdate() {
+        // Arrange
+        String email = "myemail@email.com";
+        Owner owner = new Owner();
+        owner.setAddressId(1L);
+        owner.setFirstName("First");
+        owner.setLastName("Last");
+        owner.setMiddleName("Middle");
+        owner.setSuffix(Suffix.SR.name());
+        owner.setEmail(email);
+        owner.setPhone("1234567890");
+
+        UpdateOwnerInfoDto updateOwnerInfo = UpdateOwnerInfoDto.builder()
+            .addressId(2L)
+            .firstName("Updated")
+            .lastName("Name")
+            .middleName(null)
+            .suffix(null)
+            .phone("8901234567")
+            .build();
+
+        // Act
+        ownerMapper.update(updateOwnerInfo, owner);
+
+        // Assert
+        assertEquals(owner.getAddressId(), updateOwnerInfo.getAddressId());
+        assertEquals(owner.getFirstName(), updateOwnerInfo.getFirstName());
+        assertEquals(owner.getLastName(), updateOwnerInfo.getLastName());
+        assertEquals(owner.getMiddleName(), updateOwnerInfo.getMiddleName());
+        assertEquals(owner.getSuffix(), updateOwnerInfo.getSuffix());
+        assertEquals(email, owner.getEmail());
+        assertEquals(owner.getPhone(), updateOwnerInfo.getPhone());
     }
 }
