@@ -12,6 +12,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.mockito.InjectMock;
 import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.rent.circle.owner.api.dto.OwnerDto;
 import org.rent.circle.owner.api.dto.SaveOwnerInfoDto;
 import org.rent.circle.owner.api.dto.UpdateOwnerInfoDto;
@@ -111,6 +112,7 @@ public class OwnerServiceTest {
 
         // Assert
         verify(ownerMapper, never()).update(updateOwnerInfo, null);
+        verify(ownerRepository, never()).persist(Mockito.any(Owner.class));
     }
 
     @Test
@@ -136,5 +138,6 @@ public class OwnerServiceTest {
 
         // Assert
         verify(ownerMapper, times(1)).update(updateOwnerInfo, owner);
+        verify(ownerRepository, times(1)).persist(owner);
     }
 }
