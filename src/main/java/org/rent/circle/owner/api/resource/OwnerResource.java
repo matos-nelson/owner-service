@@ -1,5 +1,6 @@
 package org.rent.circle.owner.api.resource;
 
+import io.quarkus.security.Authenticated;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -17,6 +18,7 @@ import org.rent.circle.owner.api.dto.UpdateOwnerInfoDto;
 import org.rent.circle.owner.api.service.OwnerService;
 
 @AllArgsConstructor
+@Authenticated
 @Path("/owner")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
