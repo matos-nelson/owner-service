@@ -10,6 +10,7 @@ import io.quarkus.test.h2.H2DatabaseTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
+import org.rent.circle.owner.api.annotation.AuthUser;
 import org.rent.circle.owner.api.dto.SaveOwnerInfoDto;
 import org.rent.circle.owner.api.dto.UpdateOwnerInfoDto;
 import org.rent.circle.owner.api.enums.Suffix;
@@ -17,6 +18,7 @@ import org.rent.circle.owner.api.enums.Suffix;
 @QuarkusTest
 @TestHTTPEndpoint(OwnerResource.class)
 @QuarkusTestResource(H2DatabaseTestResource.class)
+@AuthUser
 public class OwnerResourceTest {
 
     @Test
