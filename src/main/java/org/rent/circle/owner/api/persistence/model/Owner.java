@@ -23,6 +23,9 @@ public class Owner extends BaseModel {
     @Column(name = "address_id")
     private Long addressId;
 
+    @Column(name = "user_id")
+    private String userId;
+
     @Column(name = "first_name")
     private String firstName;
 

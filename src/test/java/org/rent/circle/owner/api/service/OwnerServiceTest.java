@@ -38,6 +38,7 @@ public class OwnerServiceTest {
         // Arrange
         SaveOwnerInfoDto ownerInfo = SaveOwnerInfoDto.builder()
             .addressId(1L)
+            .userId("123")
             .firstName("First")
             .lastName("Last")
             .middleName("Middle")

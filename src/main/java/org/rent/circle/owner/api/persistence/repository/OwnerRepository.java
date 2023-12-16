@@ -7,4 +7,7 @@ import org.rent.circle.owner.api.persistence.model.Owner;
 @ApplicationScoped
 public class OwnerRepository implements PanacheRepository<Owner> {
 
+    public Owner findByUserId(String userId) {
+        return find("userId", userId).firstResult();
+    }
 }

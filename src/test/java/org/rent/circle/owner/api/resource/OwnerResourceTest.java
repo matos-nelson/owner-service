@@ -22,10 +22,11 @@ import org.rent.circle.owner.api.enums.Suffix;
 public class OwnerResourceTest {
 
     @Test
-    public void Post_WhenGivenAValidRequestToSave_ShouldReturnSavedOwnerId() {
+    public void POST_WhenGivenAValidRequestToSave_ShouldReturnSavedOwnerId() {
         // Arrange
         SaveOwnerInfoDto ownerInfo = SaveOwnerInfoDto.builder()
             .addressId(1L)
+            .userId("123")
             .firstName("First")
             .lastName("Last")
             .middleName("Middle")
@@ -51,6 +52,7 @@ public class OwnerResourceTest {
         // Arrange
         SaveOwnerInfoDto ownerInfo = SaveOwnerInfoDto.builder()
             .addressId(1L)
+            .userId("123")
             .firstName("First")
             .lastName("Last")
             .middleName("Middle")
