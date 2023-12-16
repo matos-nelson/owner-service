@@ -104,12 +104,12 @@ public class OwnerServiceTest {
     @Test
     public void updateOwnerInfo_WhenOwnerIsNotFound_ShouldReturnNotUpdate() {
         // Arrange
-        Long ownerId = 1L;
+        String userId = "123";
         UpdateOwnerInfoDto updateOwnerInfo = UpdateOwnerInfoDto.builder().build();
-        when(ownerRepository.findById(ownerId)).thenReturn(null);
+        when(ownerRepository.findByUserId(userId)).thenReturn(null);
 
         // Act
-        ownerService.updateOwnerInfo(ownerId, updateOwnerInfo);
+        ownerService.updateOwnerInfo(userId, updateOwnerInfo);
 
         // Assert
         verify(ownerMapper, never()).update(updateOwnerInfo, null);
@@ -119,10 +119,10 @@ public class OwnerServiceTest {
     @Test
     public void updateOwnerInfo_WhenCalled_ShouldUpdate() {
         // Arrange
-        Long ownerId = 1L;
+        String userId = "123";
 
         Owner owner = new Owner();
-        owner.setId(ownerId);
+        owner.setUserId(userId);
 
         UpdateOwnerInfoDto updateOwnerInfo = UpdateOwnerInfoDto.builder()
             .addressId(2L)
@@ -132,10 +132,10 @@ public class OwnerServiceTest {
             .suffix(null)
             .phone("8901234567")
             .build();
-        when(ownerRepository.findById(ownerId)).thenReturn(owner);
+        when(ownerRepository.findByUserId(userId)).thenReturn(owner);
 
         // Act
-        ownerService.updateOwnerInfo(ownerId, updateOwnerInfo);
+        ownerService.updateOwnerInfo(userId, updateOwnerInfo);
 
         // Assert
         verify(ownerMapper, times(1)).update(updateOwnerInfo, owner);

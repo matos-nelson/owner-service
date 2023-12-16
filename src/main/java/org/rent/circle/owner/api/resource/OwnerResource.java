@@ -12,6 +12,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.rent.circle.owner.api.dto.OwnerDto;
 import org.rent.circle.owner.api.dto.SaveOwnerInfoDto;
 import org.rent.circle.owner.api.dto.UpdateOwnerInfoDto;
@@ -26,6 +27,7 @@ import org.rent.circle.owner.api.service.OwnerService;
 public class OwnerResource {
 
     private final OwnerService ownerService;
+    private final JsonWebToken jwt;
 
     @POST
     public Long saveOwnerInfo(@Valid SaveOwnerInfoDto ownerInfo) {
@@ -39,8 +41,7 @@ public class OwnerResource {
     }
 
     @PUT
-    @Path("/{id}")
-    public void updateOwner(@PathParam("id") Long ownerId, @Valid UpdateOwnerInfoDto updateOwnerInfo) {
-        ownerService.updateOwnerInfo(ownerId, updateOwnerInfo);
+    public void updateOwner(@Valid UpdateOwnerInfoDto updateOwnerInfo) {
+        ownerService.updateOwnerInfo(jwt.getName(), updateOwnerInfo);
     }
 }

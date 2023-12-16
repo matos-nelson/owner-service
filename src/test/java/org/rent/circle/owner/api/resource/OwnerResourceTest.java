@@ -8,6 +8,13 @@ import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.common.http.TestHTTPEndpoint;
 import io.quarkus.test.h2.H2DatabaseTestResource;
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.security.TestSecurity;
+import io.quarkus.test.security.jwt.Claim;
+import io.quarkus.test.security.jwt.JwtSecurity;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 import org.rent.circle.owner.api.annotation.AuthUser;
@@ -20,6 +27,16 @@ import org.rent.circle.owner.api.enums.Suffix;
 @QuarkusTestResource(H2DatabaseTestResource.class)
 @AuthUser
 public class OwnerResourceTest {
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target({ElementType.METHOD})
+    @TestSecurity(user = "update_user")
+    @JwtSecurity(claims = {
+        @Claim(key = "user_id", value = "123456")
+    })
+    public @interface UpdateOwnerUser {
+
+    }
 
     @Test
     public void POST_WhenGivenAValidRequestToSave_ShouldReturnSavedOwnerId() {
@@ -105,6 +122,7 @@ public class OwnerResourceTest {
     }
 
     @Test
+    @UpdateOwnerUser
     public void PUT_WhenGivenAnInValidRequestToUpdate_ShouldReturnBadRequest() {
         // Arrange
         UpdateOwnerInfoDto updateOwnerInfo = UpdateOwnerInfoDto.builder()
@@ -122,12 +140,13 @@ public class OwnerResourceTest {
             .contentType("application/json")
             .body(updateOwnerInfo)
             .when()
-            .put("200")
+            .put()
             .then()
             .statusCode(HttpStatus.SC_BAD_REQUEST);
     }
 
     @Test
+    @UpdateOwnerUser
     public void PUT_WhenAnOwnerCantBeFound_ShouldReturnNoContent() {
         // Arrange
         UpdateOwnerInfoDto updateOwnerInfo = UpdateOwnerInfoDto.builder()
@@ -145,12 +164,13 @@ public class OwnerResourceTest {
             .contentType("application/json")
             .body(updateOwnerInfo)
             .when()
-            .put("1")
+            .put()
             .then()
             .statusCode(HttpStatus.SC_NO_CONTENT);
     }
 
     @Test
+    @UpdateOwnerUser
     public void PUT_WheGivenAValidUpdateRequest_ShouldReturnNoContent() {
         // Arrange
         UpdateOwnerInfoDto updateOwnerInfo = UpdateOwnerInfoDto.builder()
@@ -168,7 +188,7 @@ public class OwnerResourceTest {
             .contentType("application/json")
             .body(updateOwnerInfo)
             .when()
-            .put("200")
+            .put()
             .then()
             .statusCode(HttpStatus.SC_NO_CONTENT);
 

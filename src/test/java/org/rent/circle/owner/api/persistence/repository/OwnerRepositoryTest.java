@@ -24,7 +24,7 @@ public class OwnerRepositoryTest {
         // Arrange
 
         // Act
-        Owner result = ownerRepository.findByUserId("892374");
+        Owner result = ownerRepository.findByUserId("invalid_user");
 
         // Assert
         assertNull(result);
@@ -36,7 +36,7 @@ public class OwnerRepositoryTest {
         // Arrange
 
         // Act
-        Owner result = ownerRepository.findByUserId("123");
+        Owner result = ownerRepository.findByUserId("auth_user");
 
         // Assert
         assertNotNull(result);
