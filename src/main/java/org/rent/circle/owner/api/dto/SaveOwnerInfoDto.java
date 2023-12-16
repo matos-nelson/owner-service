@@ -20,6 +20,9 @@ public class SaveOwnerInfoDto {
     private Long addressId;
 
     @NotNull
+    private String userId;
+
+    @NotNull
     @NotBlank
     private String firstName;
 

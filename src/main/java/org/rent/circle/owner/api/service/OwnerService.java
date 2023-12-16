@@ -32,8 +32,8 @@ public class OwnerService {
     }
 
     @Transactional
-    public void updateOwnerInfo(Long ownerId, UpdateOwnerInfoDto updateOwnerInfo) {
-        Owner owner = ownerRepository.findById(ownerId);
+    public void updateOwnerInfo(String userId, UpdateOwnerInfoDto updateOwnerInfo) {
+        Owner owner = ownerRepository.findByUserId(userId);
         if (owner == null) {
             return;
         }

@@ -35,6 +35,7 @@ public class OwnerMapperTest {
         // Arrange
         SaveOwnerInfoDto ownerInfo = SaveOwnerInfoDto.builder()
             .addressId(1L)
+            .userId("123")
             .firstName("First")
             .lastName("Last")
             .middleName("Middle")
@@ -49,6 +50,7 @@ public class OwnerMapperTest {
         // Assert
         assertNotNull(result);
         assertEquals(ownerInfo.getAddressId(), result.getAddressId());
+        assertEquals(ownerInfo.getUserId(), result.getUserId());
         assertEquals(ownerInfo.getFirstName(), result.getFirstName());
         assertEquals(ownerInfo.getLastName(), result.getLastName());
         assertEquals(ownerInfo.getMiddleName(), result.getMiddleName());

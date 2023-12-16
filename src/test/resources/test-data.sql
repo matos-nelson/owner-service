@@ -1,2 +1,2 @@
-INSERT INTO owner(id, address_id, first_name, last_name, email, phone) values (100, 200, 'First', 'Last', 'first.last@email.com', '1234567890');
-INSERT INTO owner(id, address_id, first_name, last_name, email, phone) values (200, 200, 'First', 'Last', 'updatetest@email.com', '1234567890');
+INSERT INTO owner(id, address_id, user_id, first_name, last_name, email, phone) values (100, 200, 'auth_user', 'First', 'Last', 'first.last@email.com', '1234567890');
+INSERT INTO owner(id, address_id, user_id, first_name, last_name, email, phone) values (200, 200, 'update_user', 'First', 'Last', 'updatetest@email.com', '1234567890');
