@@ -35,6 +35,7 @@ public class OwnerService {
     public void updateOwnerInfo(String userId, UpdateOwnerInfoDto updateOwnerInfo) {
         Owner owner = ownerRepository.findByUserId(userId);
         if (owner == null) {
+            log.info("Could Not Find Owner For Update");
             return;
         }
 
