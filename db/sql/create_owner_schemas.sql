@@ -11,6 +11,6 @@ CREATE TABLE IF NOT EXISTS owner (
   created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   KEY address_id_idx (address_id),
-  KEY user_id_idx (user_id),
+  UNIQUE KEY user_id_idx (user_id),
   UNIQUE KEY (email)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
